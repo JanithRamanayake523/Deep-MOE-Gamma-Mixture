@@ -1,0 +1,6 @@
+# Study 1 (replication benchmark) -- base paper Case 3: medium overlap, equal variances.
+study: replication
+case: case3
+n_runs: 500
+seed: 202403
+methods: [wh_mclust, ecm, mle, mom]

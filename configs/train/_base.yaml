@@ -1,0 +1,81 @@
+# Shared defaults for AEM-Net training (RESEARCH_METHODOLOGY.md 3 and 6).
+# Family configs inherit this file via `base: _base.yaml` and override what differs.
+seed: 0
+
+family: {name: gamma, k: 2}
+
+simulator:
+  g_min: 1
+  g_max: 6                       # number of slots S
+  n_min: 20
+  n_max: 10000
+  n_log_uniform: true
+  same_n_per_batch: true         # one n per batch -> no padding waste
+  dirichlet_conc_range: [0.3, 3.0]
+  min_weight: 0.02
+  overlap_stratification: true
+  overlap_bins: [[0.0, 0.05], [0.05, 0.20], [0.20, 0.50]]
+  overlap_n_mc: 2000
+  overlap_max_tries: 40
+  scale_augment: true
+  log_scale_range: 4.6
+  loc_range: 5.0
+  param_bank: null               # family configs point to banks/<name>.npz (build_param_bank.py)
+
+model:
+  arch: aem
+  d_model: 128
+  n_heads: 4
+  encoder: isab
+  n_enc_layers: 2
+  n_inducing: 16
+  T: 4
+  tie_iterations: true
+  slot_init: learned
+  use_loglik: true
+  loglik_scale_init: 1.0
+  learn_loglik_scale: true
+  detach_loglik: false
+  temperature_init: 1.0
+  pooling: responsibility
+  use_suffstats: true
+  shared_expert: true
+  slot_attention: false
+  expert_hidden: 128
+  expert_layers: 2
+  existence_head: true
+  canonicalize: true
+  flow_head: true
+  flow_hidden: 128
+  flow_layers: 3
+  flow_detach: true
+  flow_steps: 32
+
+loss:
+  match: quotient
+  w_pi: 1.0
+  deep_supervision: 0.5
+  resp: 0.5
+  exist: 0.5
+  unmatched_pi: 1.0
+  nll: 0.0
+  flow: 1.0
+
+training:
+  batch_size: 64
+  steps: 200000
+  lr: 0.0003
+  min_lr: 0.00001
+  weight_decay: 0.01
+  warmup_steps: 2000
+  grad_clip: 1.0
+  val_every: 2000
+  val_batches: 16
+  val_batch_size: 64
+  patience: 20
+  num_workers: 6
+  amp: false
+  log_every: 200
+  u_stats_samples: 2000
+  aux_fade_frac: 0.2             # last 20%: fade aux losses (10%), then pure quotient loss (10%)
+  out_dir: runs/default

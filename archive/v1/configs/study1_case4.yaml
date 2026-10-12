@@ -1,0 +1,6 @@
+# Study 1 (replication benchmark) -- base paper Case 4: three-component bivariate mixture.
+study: replication
+case: case4
+n_runs: 500
+seed: 202404
+methods: [wh_mclust, ecm, mle, mom]

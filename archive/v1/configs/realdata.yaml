@@ -1,0 +1,8 @@
+# Study 3 -- real-data application (RESEARCH_METHODOLOGY.md section 6.6).
+# Data from Yue (2001), Hydrological Processes 15(6):1033-1045; not redistributed.
+study: realdata
+data_path: data/madawaska.csv   # columns: duration,peak  (77 rows, 1919-1995)
+seed: 777
+n_bootstrap: 500                # bootstrap resamples for UQ (Study 4)
+nominal_coverage: [0.90, 0.95]
+out_dir: results/study3

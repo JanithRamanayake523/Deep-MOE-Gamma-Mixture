@@ -1,0 +1,7 @@
+# Study 1 (replication benchmark) -- base paper Case 1: high overlap, equal mean vectors.
+# True parameters live in dmoegamma.simulation.cases.PAPER_CASES["case1"].
+study: replication
+case: case1
+n_runs: 500               # matches the base paper's 500 Monte Carlo runs
+seed: 202401
+methods: [wh_mclust, ecm, mle, mom]   # neural estimator added via --checkpoint

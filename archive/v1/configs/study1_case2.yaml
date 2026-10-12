@@ -1,0 +1,6 @@
+# Study 1 (replication benchmark) -- base paper Case 2: low overlap, equal scales.
+study: replication
+case: case2
+n_runs: 500
+seed: 202402
+methods: [wh_mclust, ecm, mle, mom]
